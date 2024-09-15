@@ -1,4 +1,5 @@
 from flask import Flask, jsonify
+from flask_cors import CORS
 from dotenv import load_dotenv
 import os
 
@@ -6,6 +7,9 @@ import os
 load_dotenv()
 
 app = Flask(__name__)
+
+# Enable CORS for all routes and origins
+CORS(app)
 
 @app.route('/products', methods=['GET'])
 def get_products():
@@ -17,7 +21,7 @@ def get_products():
     return jsonify(products)
 
 if __name__ == '__main__':
-    # Get the port from the environment variable or default to 8000
+    # Get the port from the environment variable or default to 3030
     port = int(os.getenv('PORT', 3030))
     # Run the Flask application on the specified port
     app.run(host='0.0.0.0', port=port)
